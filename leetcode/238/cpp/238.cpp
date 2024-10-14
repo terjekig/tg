@@ -8,9 +8,15 @@
 class Solution {
 public:
     std::vector<int> productExceptSelf(std::vector<int>& nums) {
+        
         std::vector<int> prod_pre;
         std::vector<int> prod_post;
         std::vector<int> result;
+
+        // I could also initialize the vectors, which would help with multiplication w 0 issues I was having:
+        // int n = nums.size();
+        // std::vector<int> prod_pre(n,1);
+
         // O(n) means I can't nest for loops to iterate over
         // No division means I can't just prod every element into a new array, then divide
 
@@ -51,12 +57,18 @@ public:
         std::cout << std::endl;
         
 
-        for (int i = 0; i < nums.size(); i++){
-            // for i in result, sum prod*
-            result.push_back( prod_pre[i] * prod_post[i] );
+        // for (int i = 0; i < nums.size(); i++){
+        //     result.push_back( prod_pre[i] * prod_post[i] );
+        // }
+        //return result;
+
+
+        // To optimize, I can omit the result vector, and just "reuse" either prod_
+        for (int i = 0; i < prod_pre.size(); i++){
+            prod_pre[i] *= prod_post[i];
         }
 
-        return result;
+        return prod_pre;
     }
 };
 
@@ -68,7 +80,6 @@ int main(){
     std::vector<int> input({1, 2, 3, 4});
     std::vector<int> result = solution.productExceptSelf(input);
 
-   // for (std::vector<char>::const_iterator i = input.begin(); i != input.end(); ++i)
     std::cout << "Input: ";
     for (auto i: input){
         std::cout << i << " ";
