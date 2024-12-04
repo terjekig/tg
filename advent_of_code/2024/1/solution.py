@@ -19,7 +19,10 @@ def process_input(path: Path) -> list:
 
     return input_list
 
-def main():
+def part_1():
+    '''
+    Calculating the distance between elements of left and right column
+    '''
 
     input_data = process_input(Path(__file__).parent / "input") # ./input
 
@@ -27,6 +30,26 @@ def main():
     second_column = sorted(input_data[1::2])
 
     dist = [abs(first - second) for first,second in zip(first_column,second_column)]
-    print(f"{sum(dist)}")
+    print(f"Solution for part 1: {sum(dist)}")
 
-main()
+
+
+def part_2():
+    '''
+    Calculating "similarity" of elements
+    '''
+
+    input_data = process_input(Path(__file__).parent / "input") # ./input
+
+    first_column = sorted(input_data[::2])
+    second_column = input_data[1::2]
+    solution = 0
+
+    for element in first_column:
+        solution += element * second_column.count(element)
+
+    print(f"Solution for part 2: {solution}")
+
+
+part_1()
+part_2()
