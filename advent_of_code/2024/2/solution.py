@@ -4,7 +4,7 @@
 from pathlib import Path
 from math import copysign
 
-def process_input(path: Path) -> list:
+def first_solution(path: Path) -> list:
     '''
     I've pasted my puzzle's input to this input file
     '''
@@ -20,7 +20,6 @@ def process_input(path: Path) -> list:
 
             # Check level's "direction"
             if line_arr[0] == line_arr[1]: # skip the level, it is not safe
-                print(f"Skipping level since first 2 are equal")
                 continue
             level_direction = copysign(1, (line_arr[1] - line_arr[0]) )
 
@@ -31,21 +30,14 @@ def process_input(path: Path) -> list:
             safe = False
             for current_level in line_arr[1:]:
                 diff = current_level - prev_level
-                safe_diff = 1 <= abs(diff) <= 3
+                safe_diff = 1 <= abs(diff) <= 3 # Range from excercise
 
-                if not safe_diff:
-                    print(f"{line_arr} not safe because diff is {diff}")
+                if ( safe_diff and ( level_direction == copysign(1, diff) ) ): # in range and direction still matches
+                    safe = True
+                    prev_level = current_level
+                else:
                     safe = False
                     break
-
-                if ( level_direction != copysign(1, diff) ):
-                    print(f"{line_arr} not safe because direction is {level_direction} but current dir is {copysign(1, diff)}")
-                    safe = False
-                    break
-
-                safe = True
-                prev_level = current_level
-
 
             if safe: n_of_safe += 1
 
@@ -59,9 +51,9 @@ def solution() -> None:
     """
     TODO
     """
-    input_data = process_input(Path(__file__).parent / "input")
+    solution_1 = first_solution(Path(__file__).parent / "input")
 
-    print(input_data)
+    print(solution_1)
 
 
 solution()
