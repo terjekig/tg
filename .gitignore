@@ -1,3 +1,6 @@
+# AoC input files: https://adventofcode.com/about#faq_copying
+advent_of_code/**/input*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
