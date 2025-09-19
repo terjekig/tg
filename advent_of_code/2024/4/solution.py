@@ -35,13 +35,6 @@ def has_good_neighbour(coords: tuple, crossword: list) -> bool:
         # can't go right
         right = False
 
-    # top left:
-    #if x == 0 or y == 0:
-    #    top_left = True
-    #else:
-    #    top_left = ( crossword[x-1][y-1] in good_neighbour[ crossword[x][y] ] ) # this is true if top left is a good neighbour
-    #print(top_left)
-
     invalid_char = "0"
 
     top_left    = crossword[x-1][y-1] if (up and left)      else invalid_char
