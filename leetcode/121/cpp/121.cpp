@@ -9,15 +9,27 @@
 class Solution {
 public:
 int maxProfit(std::vector<int>& prices) {
-    // subtract every number from a buying point, get the max from it, push it to an array, then step one forward, do the same, then get the max from the array
+    
+    // better solution, no vector to hold potential profits, single for loop
 
-    std::vector<int> profits = {};
+    if (prices.empty()) return 0;
     
-/*     for (auto i: prices) {
-        std::cout << i << " ";
+    int min_price = prices[0];
+    int max_profit = 0;
+    
+    for (const auto& i: prices) {
+        // i will be the actual prices, not indices
+        min_price = std::min(min_price, i); // check if there is a better buy-in point
+        max_profit = std::max(max_profit, (i - min_price)); // update max profit if current price is better to sell at
     }
-    std::cout << std::endl; */
+
+    return max_profit;
     
+    
+    
+    // subtract every number from a buying point, get the max from it, push it to a vector, then step one forward, do the same, then get the max from the vector
+    std::vector<int> profits = {};
+
     for (auto i = 0; i < prices.size(); i++) {
         // go over every day
         //std::cout << "Looking at day " << i+1 << ", buying price is " << prices[i] << std::endl;
